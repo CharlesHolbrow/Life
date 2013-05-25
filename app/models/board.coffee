@@ -8,6 +8,9 @@ class window.Board extends Backbone.Model
 
     @set 'cells', ary
 
+  getCellState: (x, y) ->
+    @get('cells')[y][x]
+
   toggle: (x, y) ->
     cells = @get 'cells'
     cells[y][x] = if cells[y][x] then 0 else 1
