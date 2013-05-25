@@ -44,3 +44,12 @@ class window.Board extends Backbone.Model
       #cell is dead
       if count is 3 then return true
     return false
+
+  step: ->
+    cells = @get 'cells'
+
+    ary = _(cells).map (row, y)=>
+      _(row).map (cell, x)=>
+        if @cellWillLive(x, y) then 1 else 0
+
+    @set 'cells', ary
