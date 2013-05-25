@@ -7,3 +7,8 @@ class window.Board extends Backbone.Model
         0
 
     @set 'cells', ary
+
+  toggle: (x, y) ->
+    cells = @get 'cells'
+    cells[y][x] = if cells[y][x] then 0 else 1
+    @trigger 'change'
