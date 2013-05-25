@@ -1,6 +1,7 @@
 class window.Board extends Backbone.Model
 
   initialize: (n = 8) ->
+    @set 'n', n
     # Initialize 2d array, fill with 0s
     ary = _(_.range(n)).map ->
       _(_.range(n)).map ->
@@ -9,6 +10,9 @@ class window.Board extends Backbone.Model
     @set 'cells', ary
 
   getCellState: (x, y) ->
+    n = @get 'n'
+    if (x >= n) or (x < 0) then return null
+    if (y >= n) or (y < 0) then return null
     @get('cells')[y][x]
 
   toggle: (x, y) ->
