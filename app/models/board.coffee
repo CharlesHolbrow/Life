@@ -19,3 +19,9 @@ class window.Board extends Backbone.Model
     cells = @get 'cells'
     cells[y][x] = if cells[y][x] then 0 else 1
     @trigger 'change'
+
+  checkHoriz: (x, y) ->
+    @getCellState(x+1, y) + @getCellState(x-1, y)
+
+  checkVert: (x, y) ->
+    @getCellState(x, y+1) + @getCellState(x, y-1)

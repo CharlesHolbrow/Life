@@ -22,3 +22,19 @@ describe 'board', ->
       expect(board.getCellState(2, 3)).toEqual 0
       board.toggle 2, 3
       expect(board.getCellState(2, 3)).toEqual 1
+
+  describe '#checkHoriz', ->
+    it 'should return number of alive neighbors to the left or right', ->
+      expect(board.checkHoriz(7, 7)).toEqual 0
+      board.toggle(6, 7)
+      expect(board.checkHoriz(7, 7)).toEqual 1
+      board.toggle(7, 6)
+      expect(board.checkHoriz(7, 7)).toEqual 1
+
+  describe '#checkVert', ->
+    it 'should return number of alive neighbors to the top or bottom', ->
+      expect(board.checkVert(7, 7)).toEqual 0
+      board.toggle(6, 7)
+      expect(board.checkVert(7, 7)).toEqual 0
+      board.toggle(7, 6)
+      expect(board.checkVert(7, 7)).toEqual 1
