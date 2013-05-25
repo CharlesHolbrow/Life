@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "board.js",
+  "sourceRoot": "../../..",
+  "sources": [
+    "app/models/board.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;CAAA;CAAA"
+}
