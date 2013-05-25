@@ -38,3 +38,17 @@ describe 'board', ->
       expect(board.checkVert(7, 7)).toEqual 0
       board.toggle(7, 6)
       expect(board.checkVert(7, 7)).toEqual 1
+
+  describe '#cellDiag', ->
+    it 'should return number of alive diagonal neighbors', ->
+      expect(board.checkDiag(3, 4)).toEqual 0
+      board.toggle(4, 5)
+      expect(board.checkDiag(3, 4)).toEqual 1
+      board.toggle(4, 3)
+      expect(board.checkDiag(3, 4)).toEqual 2
+      board.toggle(2, 3)
+      expect(board.checkDiag(3, 4)).toEqual 3
+      board.toggle(2, 5)
+      expect(board.checkDiag(3, 4)).toEqual 4
+      board.toggle(3, 3)
+      expect(board.checkDiag(3, 4)).toEqual 4

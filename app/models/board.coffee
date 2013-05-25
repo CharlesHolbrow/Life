@@ -25,3 +25,7 @@ class window.Board extends Backbone.Model
 
   checkVert: (x, y) ->
     @getCellState(x, y+1) + @getCellState(x, y-1)
+
+  checkDiag: (x, y) ->
+    @getCellState(x+1, y+1) + @getCellState(x-1, y-1) +
+      @getCellState(x+1, y-1) + @getCellState(x-1, y+1)
