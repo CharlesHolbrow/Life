@@ -68,3 +68,29 @@ describe 'board', ->
       expect(board.checkNeighbors(3, 4)).toEqual 5
       board.toggle(4, 4)
       expect(board.checkNeighbors(3, 4)).toEqual 6
+
+  describe '#cellWillLive', ->
+    it 'should return false if alive and less than 2 neighbors', ->
+      board.toggle(3, 4)
+      expect(board.cellWillLive(3, 4)).toBe false
+      board.toggle(3, 3)
+      expect(board.cellWillLive(3, 4)).toBe false
+    it 'should return true if alive and 2 or 3 neighbors', ->
+      board.toggle(3, 3)
+      board.toggle(4, 4)
+      board.toggle(3, 4)
+      expect(board.cellWillLive(3, 4)).toBe true
+      board.toggle(2, 3)
+      expect(board.cellWillLive(3, 4)).toBe true
+    it 'should return false if alive and more than 3 neighbors', ->
+      board.toggle(3, 3)
+      board.toggle(4, 4)
+      board.toggle(2, 3)
+      board.toggle(3, 5)
+      board.toggle(3, 4)
+      expect(board.cellWillLive(3, 4)).toBe false
+    it 'should return true if dead and exactly 3 neighbors', ->
+      board.toggle(3, 3)
+      board.toggle(4, 4)
+      board.toggle(2, 3)
+      expect(board.cellWillLive(3, 4)).toBe true

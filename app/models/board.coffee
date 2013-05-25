@@ -32,3 +32,15 @@ class window.Board extends Backbone.Model
 
   checkNeighbors: (x, y) ->
     @checkHoriz(x, y) + @checkVert(x, y) + @checkDiag(x, y)
+
+  cellWillLive: (x, y) ->
+    count = @checkNeighbors(x ,y)
+    if @getCellState(x, y)
+      #cell is alive
+      if count < 2 then return false
+      else if count > 3 then return false
+      else return true
+    else
+      #cell is dead
+      if count is 3 then return true
+    return false
