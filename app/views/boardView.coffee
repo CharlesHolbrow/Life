@@ -4,6 +4,8 @@ class window.BoardView extends Backbone.View
 
   initialize: ->
     @render()
+    @$el.on 'click', 'td', (event)->
+      console.log('click!', $(@).data())
 
   render: ->
     cells = @model.get('cells')
