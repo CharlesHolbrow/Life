@@ -29,3 +29,6 @@ class window.Board extends Backbone.Model
   checkDiag: (x, y) ->
     @getCellState(x+1, y+1) + @getCellState(x-1, y-1) +
       @getCellState(x+1, y-1) + @getCellState(x-1, y+1)
+
+  checkNeighbors: (x, y) ->
+    @checkHoriz(x, y) + @checkVert(x, y) + @checkDiag(x, y)
