@@ -16,7 +16,6 @@ class window.BoardView extends Backbone.View
 
       # Populate row
       _(row).each (cell, colIndex) =>
-        console.log(colIndex, rowIndex)
         $td = $('<td>').text(cell)
         $td.data({'x': colIndex, 'y': rowIndex})
         $td.appendTo($tr)
