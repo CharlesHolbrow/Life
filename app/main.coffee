@@ -1,1 +1,1 @@
-new BoardView({model: new Board()}).$el.appendTo('body')
+new AppView({model: new App()}).$el.appendTo('body')
