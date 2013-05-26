@@ -55,6 +55,9 @@
 
     AppView.prototype.render = function() {
       this.$el.html(this.template());
+      this.$el.append(new StatsView({
+        model: this.model.get('board')
+      }).el);
       return this.$el.append(new BoardView({
         model: this.model.get('board')
       }).el);

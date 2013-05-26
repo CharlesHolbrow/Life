@@ -30,4 +30,5 @@ class window.AppView extends Backbone.View
 
   render: ->
     @$el.html @template()
-    @$el.append new BoardView({model: @model.get('board')}).el
+    @$el.append new StatsView(model: @model.get('board')).el
+    @$el.append new BoardView(model: @model.get('board')).el
