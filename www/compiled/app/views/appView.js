@@ -12,7 +12,11 @@
       return _ref;
     }
 
-    AppView.prototype.template = _.template('<button id="step">Step</button><button id="run">Run</button><button id="stop">Stop</button>');
+    AppView.prototype.template = _.template('\
+    <button id="step">Step</button>\
+    <button id="run">Run</button>\
+    <button id="stop" disabled>Stop</button>\
+    ');
 
     AppView.prototype.initialize = function() {
       return this.render();
@@ -23,10 +27,22 @@
         return this.model.get('board').step();
       },
       'click button#run': function() {
-        return this.model.run();
+        this.model.run();
+        $('#stop').attr({
+          'disabled': false
+        });
+        return $('#run').attr({
+          'disabled': true
+        });
       },
       'click button#stop': function() {
-        return this.model.stop();
+        this.model.stop();
+        $('#run').attr({
+          'disabled': false
+        });
+        return $('#stop').attr({
+          'disabled': true
+        });
       }
     };
 
