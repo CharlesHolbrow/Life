@@ -1,1 +1,1 @@
-coffee --output compiled --map --watch --compile .
+coffee --output www/compiled --map --watch --compile .
