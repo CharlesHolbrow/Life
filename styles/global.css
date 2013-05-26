@@ -1,12 +1,20 @@
 td {
   height: 20px;
   width: 20px;
-  border: 1px solid black;
-  padding: 0px;
-  margin: 0px;
-  background-color: #eee;
+  padding: 0;
+  margin: 0;
+  background-color: black;
 }
 
-td.alive {
+.alive {
   background-color: green;
+}
+
+body {
+  background-color: black;
+}
+
+table {
+  border-spacing: 1px;
+  background-color: gray;
 }

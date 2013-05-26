@@ -13,16 +13,19 @@ class window.BoardView extends Backbone.View
       @model.toggle data.x, data.y
 
   render: ->
+    n = @model.get 'n'
     @$el.empty()
     cells = @model.get('cells')
 
     # Render each row
-    _(cells).each (row, rowIndex) =>
+    _(cells).each (row, y) =>
       $tr = $('<tr>').appendTo(@$el)
-
+      yColor = Math.floor(255 / n * (y+1))
       # Populate row
-      _(row).each (cell, colIndex) =>
+      _(row).each (cell, x) =>
+        xColor = Math.floor(255 / n * (x+1))
         $td = $('<td>')
-        if cell then $td.addClass 'alive'
-        $td.data({'x': colIndex, 'y': rowIndex})
+        if cell
+          $td.css {'background-color': 'rgb(255, '+xColor+', '+yColor+')'}
+        $td.data({'x': x, 'y': y})
         $td.appendTo($tr)
