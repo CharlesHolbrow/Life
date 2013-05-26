@@ -12,10 +12,12 @@ class window.AppView extends Backbone.View
   events:
     'click button#step': ->
       @model.get('board').step()
+
     'click button#run': ->
       @model.run()
       $('#stop').attr 'disabled': false
       $('#run').attr 'disabled': true
+
     'click button#stop': ->
       @model.stop()
       $('#run').attr 'disabled': false
