@@ -22,6 +22,7 @@ class window.BoardView extends Backbone.View
 
       # Populate row
       _(row).each (cell, colIndex) =>
-        $td = $('<td>').text(cell)
+        $td = $('<td>')
+        if cell then $td.addClass 'alive'
         $td.data({'x': colIndex, 'y': rowIndex})
         $td.appendTo($tr)
