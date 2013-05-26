@@ -16,7 +16,7 @@
       var ary;
 
       if (n == null) {
-        n = 16;
+        n = 24;
       }
       this.set('n', n);
       this.set('aliveCells', 0);
