@@ -13,7 +13,13 @@
     }
 
     App.prototype.initialize = function() {
-      return this.set('board', new Board());
+      var _this = this;
+
+      this.set('board', new Board());
+      this.set('running', false);
+      return this.get('board').on('stop', function() {
+        return _this.stop();
+      });
     };
 
     App.prototype.run = function() {
@@ -23,11 +29,13 @@
       func = function() {
         return board.step();
       };
-      return this.set('runIndex', setInterval(func, 250));
+      this.set('runIndex', setInterval(func, 250));
+      return this.set('running', true);
     };
 
     App.prototype.stop = function() {
-      return clearInterval(this.get('runIndex'));
+      clearInterval(this.get('runIndex'));
+      return this.set('running', false);
     };
 
     return App;

@@ -2,6 +2,8 @@ class window.Board extends Backbone.Model
 
   initialize: (n = 16) ->
     @set 'n', n
+    @set 'aliveCells', 0
+
     # Initialize 2d array, fill with 0s
     ary = _(_.range(n)).map ->
       _(_.range(n)).map ->
@@ -16,8 +18,14 @@ class window.Board extends Backbone.Model
     @get('cells')[y][x]
 
   toggle: (x, y) ->
+    aliveCells = @get 'aliveCells'
     cells = @get 'cells'
-    cells[y][x] = if cells[y][x] then 0 else 1
+    if cells[y][x]
+      cells[y][x] = 0
+      @set 'aliveCells', aliveCells - 1
+    else
+      cells[y][x] = 1
+      @set 'aliveCells', aliveCells + 1
     @trigger 'change'
 
   checkHoriz: (x, y) ->
@@ -47,9 +55,16 @@ class window.Board extends Backbone.Model
 
   step: ->
     cells = @get 'cells'
+    aliveCells = 0
 
     ary = _(cells).map (row, y)=>
       _(row).map (cell, x)=>
-        if @cellWillLive(x, y) then 1 else 0
+        if @cellWillLive(x, y)
+          aliveCells++
+          1
+        else
+          0
 
+    @set 'aliveCells', aliveCells
     @set 'cells', ary
+    unless aliveCells then @trigger 'stop', @

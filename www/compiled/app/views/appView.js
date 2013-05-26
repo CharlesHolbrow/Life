@@ -19,7 +19,26 @@
     ');
 
     AppView.prototype.initialize = function() {
-      return this.render();
+      var _this = this;
+
+      this.render();
+      return this.model.on('change:running', function() {
+        if (_this.model.get('running')) {
+          $('#stop').attr({
+            'disabled': false
+          });
+          return $('#run').attr({
+            'disabled': true
+          });
+        } else {
+          $('#run').attr({
+            'disabled': false
+          });
+          return $('#stop').attr({
+            'disabled': true
+          });
+        }
+      });
     };
 
     AppView.prototype.events = {
@@ -27,22 +46,10 @@
         return this.model.get('board').step();
       },
       'click button#run': function() {
-        this.model.run();
-        $('#stop').attr({
-          'disabled': false
-        });
-        return $('#run').attr({
-          'disabled': true
-        });
+        return this.model.run();
       },
       'click button#stop': function() {
-        this.model.stop();
-        $('#run').attr({
-          'disabled': false
-        });
-        return $('#stop').attr({
-          'disabled': true
-        });
+        return this.model.stop();
       }
     };
 
