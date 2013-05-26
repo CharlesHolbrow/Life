@@ -1,6 +1,6 @@
 class window.Board extends Backbone.Model
 
-  initialize: (n = 8) ->
+  initialize: (n = 32) ->
     @set 'n', n
     # Initialize 2d array, fill with 0s
     ary = _(_.range(n)).map ->
