@@ -13,10 +13,16 @@
     }
 
     Cell.prototype.initialize = function(params) {
+      var b, g;
+
+      this.set('n', params.n);
       this.set('x', params.x);
       this.set('y', params.y);
       this.set('alive', false);
-      return this.set('willLive', false);
+      this.set('willLive', false);
+      g = Math.floor(255 / params.n * (params.y + 1));
+      b = Math.floor(255 / params.n * (params.x + 1));
+      return this.set('color', 'rgb(115, ' + g + ', ' + b + ')');
     };
 
     return Cell;

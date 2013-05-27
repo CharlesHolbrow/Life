@@ -6,12 +6,12 @@ class window.CellView extends Backbone.View
 
     @model.on 'change:alive', =>
       if @model.get 'alive'
-        @$el.css 'background-color': 'white'
+        @$el.css 'background-color': @model.get 'color'
       else
         @$el.css 'background-color': 'black'
 
   events:
     # hint: try 'mouseenter'
-    'click': (event) ->
+    'mouseenter': (event) ->
       @model.set 'alive', !@model.get('alive')
 

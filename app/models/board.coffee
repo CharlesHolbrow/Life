@@ -6,7 +6,7 @@ class window.Board extends Backbone.Model
 
     ary = _(_.range(n)).map (row, y)->
       _(_.range(n)).map (col, x)->
-        new Cell (x: x, y: y)
+        new Cell (n: n, x: x, y: y)
 
     @set 'cells', ary
 

@@ -23,6 +23,7 @@
       ary = _(_.range(n)).map(function(row, y) {
         return _(_.range(n)).map(function(col, x) {
           return new Cell({
+            n: n,
             x: x,
             y: y
           });
