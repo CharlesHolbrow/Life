@@ -23,15 +23,6 @@
       });
     };
 
-    BoardView.prototype.events = {
-      'click td': function(event) {
-        var data;
-
-        data = $(event.target).data();
-        return this.model.toggle(data.x, data.y);
-      }
-    };
-
     BoardView.prototype.render = function() {
       var cells, n,
         _this = this;
@@ -40,20 +31,15 @@
       this.$el.empty();
       cells = this.model.get('cells');
       return _(cells).each(function(row, y) {
-        var $tr, yColor;
+        var $tr;
 
         $tr = $('<tr>').appendTo(_this.$el);
-        yColor = Math.floor(255 / n * (y + 1));
         return _(row).each(function(cell, x) {
-          var $td, xColor;
+          var $td;
 
-          xColor = Math.floor(255 / n * (x + 1));
-          $td = $('<td>');
-          if (cell) {
-            $td.css({
-              'background-color': 'rgb(255, ' + xColor + ', ' + yColor + ')'
-            });
-          }
+          $td = new CellView({
+            model: cells[y][x]
+          }).$el;
           $td.data({
             'x': x,
             'y': y

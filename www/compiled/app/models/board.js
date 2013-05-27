@@ -16,20 +16,23 @@
       var ary;
 
       if (n == null) {
-        n = 24;
+        n = 100;
       }
       this.set('n', n);
       this.set('aliveCells', 0);
-      ary = _(_.range(n)).map(function() {
-        return _(_.range(n)).map(function() {
-          return 0;
+      ary = _(_.range(n)).map(function(row, y) {
+        return _(_.range(n)).map(function(col, x) {
+          return new Cell({
+            x: x,
+            y: y
+          });
         });
       });
       return this.set('cells', ary);
     };
 
     Board.prototype.getCellState = function(x, y) {
-      var n;
+      var cell, n;
 
       n = this.get('n');
       if ((x >= n) || (x < 0)) {
@@ -38,22 +41,12 @@
       if ((y >= n) || (y < 0)) {
         return null;
       }
-      return this.get('cells')[y][x];
-    };
-
-    Board.prototype.toggle = function(x, y) {
-      var aliveCells, cells;
-
-      aliveCells = this.get('aliveCells');
-      cells = this.get('cells');
-      if (cells[y][x]) {
-        cells[y][x] = 0;
-        this.set('aliveCells', aliveCells - 1);
+      cell = this.get('cells')[y][x];
+      if (cell.get('alive')) {
+        return 1;
       } else {
-        cells[y][x] = 1;
-        this.set('aliveCells', aliveCells + 1);
+        return 0;
       }
-      return this.trigger('change');
     };
 
     Board.prototype.checkHoriz = function(x, y) {
@@ -93,26 +86,27 @@
     };
 
     Board.prototype.step = function() {
-      var aliveCells, ary, cells,
+      var aliveCells, cells,
         _this = this;
 
       cells = this.get('cells');
       aliveCells = 0;
-      ary = _(cells).map(function(row, y) {
-        return _(row).map(function(cell, x) {
+      _(cells).each(function(row, y) {
+        return _(row).each(function(cell, x) {
+          cell = cells[y][x];
           if (_this.cellWillLive(x, y)) {
-            aliveCells++;
-            return 1;
+            return cell.set('willLive', true);
           } else {
-            return 0;
+            return cell.set('willLive', false);
           }
         });
       });
-      this.set('aliveCells', aliveCells);
-      this.set('cells', ary);
-      if (!aliveCells) {
-        return this.trigger('stop', this);
-      }
+      return _(cells).each(function(row, y) {
+        return _(row).each(function(cell, x) {
+          cell = cells[y][x];
+          return cell.set('alive', cell.get('willLive'));
+        });
+      });
     };
 
     return Board;
