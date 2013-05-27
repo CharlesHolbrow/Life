@@ -1,6 +1,6 @@
 class window.Board extends Backbone.Model
 
-  initialize: (n = 50) ->
+  initialize: (n = 20) ->
     @set 'n', n
     @set 'aliveCells', 0
 

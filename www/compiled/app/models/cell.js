@@ -22,7 +22,10 @@
       this.set('willLive', false);
       g = Math.floor(255 / params.n * (params.y + 1));
       b = Math.floor(255 / params.n * (params.x + 1));
-      return this.set('color', 'rgb(115, ' + g + ', ' + b + ')');
+      this.set('color', 'rgb(255, ' + g + ', ' + b + ')');
+      return this.on('change:alive', function() {
+        return this.trigger('stateChange', this);
+      });
     };
 
     return Cell;

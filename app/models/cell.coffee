@@ -8,4 +8,7 @@ class window.Cell extends Backbone.Model
     @set 'willLive', false
     g = Math.floor(255 / params.n * (params.y + 1))
     b = Math.floor(255 / params.n * (params.x + 1))
-    @set 'color', 'rgb(115, '+g+', '+b+')'
+    @set 'color', 'rgb(255, '+g+', '+b+')'
+
+    @on 'change:alive', ->
+      @trigger 'stateChange', @
