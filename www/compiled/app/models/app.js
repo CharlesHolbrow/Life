@@ -29,7 +29,7 @@
       func = function() {
         return board.step();
       };
-      this.set('runIndex', setInterval(func, 250));
+      this.set('runIndex', setInterval(func, 100));
       return this.set('running', true);
     };
 

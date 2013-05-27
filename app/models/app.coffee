@@ -10,7 +10,7 @@ class window.App extends Backbone.Model
     board = @get 'board'
     func = ->
       board.step()
-    @set 'runIndex', setInterval(func, 250)
+    @set 'runIndex', setInterval(func, 100)
     @set 'running', true
 
   stop: ->
