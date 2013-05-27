@@ -1,12 +1,12 @@
 class window.Board extends Backbone.Model
 
-  initialize: (n = 50) ->
+  initialize: (n = 20) ->
     @set 'n', n
     @set 'aliveCells', 0
 
     ary = _(_.range(n)).map (row, y)->
       _(_.range(n)).map (col, x)->
-        new Cell (x: x, y: y)
+        new Cell (n: n, x: x, y: y)
 
     @set 'cells', ary
 
@@ -51,6 +51,7 @@ class window.Board extends Backbone.Model
         cell = cells[y][x]
         if @cellWillLive(x, y)
           cell.set 'willLive', true
+          aliveCells++
         else
           cell.set 'willLive', false
 
@@ -58,4 +59,8 @@ class window.Board extends Backbone.Model
       _(row).each (cell, x)=>
         cell = cells[y][x]
         cell.set 'alive', cell.get 'willLive'
+
+    if not aliveCells then @trigger 'stop'
+
+    @set 'aliveCells', aliveCells
 

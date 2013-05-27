@@ -16,13 +16,14 @@
       var ary;
 
       if (n == null) {
-        n = 50;
+        n = 20;
       }
       this.set('n', n);
       this.set('aliveCells', 0);
       ary = _(_.range(n)).map(function(row, y) {
         return _(_.range(n)).map(function(col, x) {
           return new Cell({
+            n: n,
             x: x,
             y: y
           });
@@ -95,18 +96,23 @@
         return _(row).each(function(cell, x) {
           cell = cells[y][x];
           if (_this.cellWillLive(x, y)) {
-            return cell.set('willLive', true);
+            cell.set('willLive', true);
+            return aliveCells++;
           } else {
             return cell.set('willLive', false);
           }
         });
       });
-      return _(cells).each(function(row, y) {
+      _(cells).each(function(row, y) {
         return _(row).each(function(cell, x) {
           cell = cells[y][x];
           return cell.set('alive', cell.get('willLive'));
         });
       });
+      if (!aliveCells) {
+        this.trigger('stop');
+      }
+      return this.set('aliveCells', aliveCells);
     };
 
     return Board;

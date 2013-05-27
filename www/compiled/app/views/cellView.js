@@ -20,7 +20,7 @@
       return this.model.on('change:alive', function() {
         if (_this.model.get('alive')) {
           return _this.$el.css({
-            'background-color': 'white'
+            'background-color': _this.model.get('color')
           });
         } else {
           return _this.$el.css({
@@ -31,7 +31,7 @@
     };
 
     CellView.prototype.events = {
-      'click': function(event) {
+      'mouseenter': function(event) {
         return this.model.set('alive', !this.model.get('alive'));
       }
     };

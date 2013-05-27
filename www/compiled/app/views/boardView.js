@@ -15,12 +15,7 @@
     BoardView.prototype.tagName = 'table';
 
     BoardView.prototype.initialize = function() {
-      var _this = this;
-
-      this.render();
-      return this.model.on('change', function() {
-        return _this.render();
-      });
+      return this.render();
     };
 
     BoardView.prototype.render = function() {
