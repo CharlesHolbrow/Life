@@ -51,6 +51,7 @@ class window.Board extends Backbone.Model
         cell = cells[y][x]
         if @cellWillLive(x, y)
           cell.set 'willLive', true
+          aliveCells++
         else
           cell.set 'willLive', false
 
@@ -58,4 +59,8 @@ class window.Board extends Backbone.Model
       _(row).each (cell, x)=>
         cell = cells[y][x]
         cell.set 'alive', cell.get 'willLive'
+
+    if not aliveCells then @trigger 'stop'
+
+    @set 'aliveCells', aliveCells
 

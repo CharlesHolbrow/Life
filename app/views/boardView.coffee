@@ -4,8 +4,6 @@ class window.BoardView extends Backbone.View
 
   initialize: ->
     @render()
-    @model.on 'change', =>
-      @render()
 
   render: ->
     n = @model.get 'n'

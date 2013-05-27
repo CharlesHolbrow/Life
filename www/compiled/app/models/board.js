@@ -95,18 +95,23 @@
         return _(row).each(function(cell, x) {
           cell = cells[y][x];
           if (_this.cellWillLive(x, y)) {
-            return cell.set('willLive', true);
+            cell.set('willLive', true);
+            return aliveCells++;
           } else {
             return cell.set('willLive', false);
           }
         });
       });
-      return _(cells).each(function(row, y) {
+      _(cells).each(function(row, y) {
         return _(row).each(function(cell, x) {
           cell = cells[y][x];
           return cell.set('alive', cell.get('willLive'));
         });
       });
+      if (!aliveCells) {
+        this.trigger('stop');
+      }
+      return this.set('aliveCells', aliveCells);
     };
 
     return Board;
