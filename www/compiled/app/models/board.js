@@ -13,22 +13,34 @@
     }
 
     Board.prototype.initialize = function(n) {
-      var ary;
+      var ary, x, y;
 
       if (n == null) {
         n = 20;
       }
       this.set('n', n);
       this.set('aliveCells', 0);
-      ary = _(_.range(n)).map(function(row, y) {
-        return _(_.range(n)).map(function(col, x) {
-          return new Cell({
-            n: n,
-            x: x,
-            y: y
-          });
-        });
-      });
+      ary = (function() {
+        var _i, _results;
+
+        _results = [];
+        for (y = _i = 0; 0 <= n ? _i < n : _i > n; y = 0 <= n ? ++_i : --_i) {
+          _results.push((function() {
+            var _j, _results1;
+
+            _results1 = [];
+            for (x = _j = 0; 0 <= n ? _j < n : _j > n; x = 0 <= n ? ++_j : --_j) {
+              _results1.push(new Cell({
+                n: n,
+                x: x,
+                y: y
+              }));
+            }
+            return _results1;
+          })());
+        }
+        return _results;
+      })();
       return this.set('cells', ary);
     };
 
@@ -71,19 +83,10 @@
 
       count = this.checkNeighbors(x, y);
       if (this.getCellState(x, y)) {
-        if (count < 2) {
-          return false;
-        } else if (count > 3) {
-          return false;
-        } else {
-          return true;
-        }
+        return count === 2 || count === 3;
       } else {
-        if (count === 3) {
-          return true;
-        }
+        return count === 3;
       }
-      return false;
     };
 
     Board.prototype.step = function() {
