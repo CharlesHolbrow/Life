@@ -7,9 +7,8 @@ class window.App extends Backbone.Model
       @stop()
 
   run: ->
-    board = @get 'board'
-    func = ->
-      board.step()
+    func = =>
+      @get('board').step()
     @set 'runIndex', setInterval(func, 100)
     @set 'running', true
 

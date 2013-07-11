@@ -23,11 +23,11 @@
     };
 
     App.prototype.run = function() {
-      var board, func;
+      var func,
+        _this = this;
 
-      board = this.get('board');
       func = function() {
-        return board.step();
+        return _this.get('board').step();
       };
       this.set('runIndex', setInterval(func, 100));
       return this.set('running', true);
