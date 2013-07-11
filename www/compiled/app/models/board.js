@@ -90,28 +90,31 @@
     };
 
     Board.prototype.step = function() {
-      var aliveCells, cells,
+      var aliveCells, cell, cells, row, setWillLive, x, y, _i, _j, _k, _l, _len, _len1, _len2, _len3,
         _this = this;
 
       cells = this.get('cells');
       aliveCells = 0;
-      _(cells).each(function(row, y) {
-        return _(row).each(function(cell, x) {
-          cell = cells[y][x];
-          if (_this.cellWillLive(x, y)) {
-            cell.set('willLive', true);
-            return aliveCells++;
-          } else {
-            return cell.set('willLive', false);
-          }
-        });
-      });
-      _(cells).each(function(row, y) {
-        return _(row).each(function(cell, x) {
-          cell = cells[y][x];
-          return cell.set('alive', cell.get('willLive'));
-        });
-      });
+      setWillLive = function(cell, x, y) {
+        cell.set('willLive', _this.cellWillLive(x, y));
+        if (cell.get('willLive')) {
+          return aliveCells++;
+        }
+      };
+      for (y = _i = 0, _len = cells.length; _i < _len; y = ++_i) {
+        row = cells[y];
+        for (x = _j = 0, _len1 = row.length; _j < _len1; x = ++_j) {
+          cell = row[x];
+          setWillLive(cell, x, y);
+        }
+      }
+      for (_k = 0, _len2 = cells.length; _k < _len2; _k++) {
+        row = cells[_k];
+        for (_l = 0, _len3 = row.length; _l < _len3; _l++) {
+          cell = row[_l];
+          cell.set('alive', cell.get('willLive'));
+        }
+      }
       if (!aliveCells) {
         this.trigger('stop');
       }
