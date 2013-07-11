@@ -6,6 +6,8 @@ class window.App extends Backbone.Model
     @get('board').on 'stop', =>
       @stop()
 
+    window.buttonState = 0
+
   run: ->
     func = =>
       @get('board').step()
@@ -15,3 +17,9 @@ class window.App extends Backbone.Model
   stop: ->
     clearInterval @get('runIndex')
     @set 'running', false
+
+  mouseDown: ->
+    window.buttonState++
+
+  mouseUp: ->
+    window.buttonState--

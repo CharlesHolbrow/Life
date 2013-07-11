@@ -44,6 +44,12 @@
       },
       'click button#stop': function() {
         return this.model.stop();
+      },
+      'mousedown': function() {
+        return this.model.mouseDown();
+      },
+      'mouseup': function() {
+        return this.model.mouseUp();
       }
     };
 

@@ -17,9 +17,10 @@
 
       this.set('board', new Board());
       this.set('running', false);
-      return this.get('board').on('stop', function() {
+      this.get('board').on('stop', function() {
         return _this.stop();
       });
+      return window.buttonState = 0;
     };
 
     App.prototype.run = function() {
@@ -36,6 +37,14 @@
     App.prototype.stop = function() {
       clearInterval(this.get('runIndex'));
       return this.set('running', false);
+    };
+
+    App.prototype.mouseDown = function() {
+      return window.buttonState++;
+    };
+
+    App.prototype.mouseUp = function() {
+      return window.buttonState--;
     };
 
     return App;

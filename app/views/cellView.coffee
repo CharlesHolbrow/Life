@@ -11,7 +11,9 @@ class window.CellView extends Backbone.View
         @$el.css 'background-color': 'black'
 
   events:
-    # hint: try 'mouseenter'
-    'mouseenter': (event) ->
-      @model.set 'alive', !@model.get('alive')
+    'mouseenter': ->
+      if window.buttonState
+        @model.set 'alive', !@model.get('alive')
 
+    'mousedown': ->
+      @model.set 'alive', !@model.get('alive')

@@ -24,6 +24,12 @@ class window.AppView extends Backbone.View
     'click button#stop': ->
       @model.stop()
 
+    'mousedown': ->
+      @model.mouseDown()
+
+    'mouseup': ->
+      @model.mouseUp()
+
   render: ->
     @$el.html @template()
     @$el.append new StatsView(model: @model.get('board')).el
