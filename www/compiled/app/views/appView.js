@@ -23,21 +23,15 @@
 
       this.render();
       return this.model.on('change:running', function() {
-        if (_this.model.get('running')) {
-          $('#stop').attr({
-            'disabled': false
-          });
-          return $('#run').attr({
-            'disabled': true
-          });
-        } else {
-          $('#run').attr({
-            'disabled': false
-          });
-          return $('#stop').attr({
-            'disabled': true
-          });
-        }
+        var running;
+
+        running = !!_this.model.get('running');
+        $('#stop').attr({
+          disabled: !running
+        });
+        return $('#run').attr({
+          disabled: running
+        });
       });
     };
 

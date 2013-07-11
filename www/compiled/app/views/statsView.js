@@ -13,7 +13,7 @@
     }
 
     StatsView.prototype.template = _.template('\
-    <span class="count">n = <%= n %>, # active cells: <%= aliveCells %></span>\
+    <span class="count">n = <%= n %>, Population: <%= aliveCells %></span>\
   ');
 
     StatsView.prototype.initialize = function() {

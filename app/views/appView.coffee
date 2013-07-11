@@ -10,12 +10,9 @@ class window.AppView extends Backbone.View
     @render()
 
     @model.on 'change:running', =>
-      if @model.get 'running'
-        $('#stop').attr 'disabled': false
-        $('#run').attr 'disabled': true
-      else
-        $('#run').attr 'disabled': false
-        $('#stop').attr 'disabled': true
+      running = !!@model.get 'running'
+      $('#stop').attr disabled: !running
+      $('#run').attr disabled: running
 
   events:
     'click button#step': ->
@@ -26,7 +23,6 @@ class window.AppView extends Backbone.View
 
     'click button#stop': ->
       @model.stop()
-
 
   render: ->
     @$el.html @template()
