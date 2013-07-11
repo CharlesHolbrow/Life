@@ -16,7 +16,7 @@
       var ary, x, y;
 
       if (n == null) {
-        n = 20;
+        n = 40;
       }
       this.set('n', n);
       this.set('aliveCells', 0);
